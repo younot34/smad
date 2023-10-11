@@ -18,6 +18,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => ['required','max:255'],
             'email' => ['required', 'email','unique:users','max:255'],
+            'phone' => ['required',],
             'password' => ['required','max:255', 'confirmed']
         ],[
             'name.required' => 'Nama Hasrus Diisi',
@@ -26,6 +27,7 @@ class UserController extends Controller
             'email.email' => 'email tidak valid',
             'email.unique' => 'email sudah ada',
             'email.max' => 'panjang email maksimal 255',
+            'phone.required' => 'phone harus diisi',
             'password.required' => 'Password harus diisi',
             'password.max' => 'Panjang password maksimal 255',
             'password.confirmed' => 'password tidak sama',
@@ -42,6 +44,7 @@ class UserController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->phone = $request->phone;
             $user->password = Hash::make($request->password);
             $user->save();
 
